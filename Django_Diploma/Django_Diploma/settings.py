@@ -37,10 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'MyShop',
     # 'rest_framework',
     # 'rest_framework.authtoken',
     # 'django_filters',
-    # 'shop',
+
 ]
 
 MIDDLEWARE = [
@@ -71,10 +72,10 @@ TEMPLATES = [
     },
 ]
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication'],
-}
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'rest_framework.authentication.TokenAuthentication'],
+# }
 
 WSGI_APPLICATION = 'Django_Diploma.wsgi.application'
 
@@ -90,9 +91,9 @@ WSGI_APPLICATION = 'Django_Diploma.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Django_Diploma_DB',
-        'USER': 'Django_Diploma',
-        'PASSWORD': 'Django_Diploma11',
+        'NAME': 'basic_db',
+        'USER': 'basic',
+        'PASSWORD': 'basic1',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -140,4 +141,4 @@ STATIC_URL = '/static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

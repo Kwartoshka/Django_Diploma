@@ -9,13 +9,15 @@ class StatusChoices(models.TextChoices):
 
 class Product(models.Model):
 
-    name = models.CharField()
+    name = models.CharField(max_length=128)
     description = models.TextField(default='')
     price = models.IntegerField(default=0)
     creation_date = models.DateField(
         auto_now_add=True
     )
-    updating_date = models.DateField(default=creation_date)
+    updating_date = models.DateField(auto_now_add=True)
+    def __str__(self):
+        return f'{self.name} - {self.price} рублей'
 
 
 class ProductReview(models.Model):
@@ -27,31 +29,28 @@ class ProductReview(models.Model):
     creation_date = models.DateField(
         auto_now_add=True
     )
-    updating_date = models.DateField(default=creation_date)
+    updating_date = models.DateField(auto_now_add=True)
 
 
 class Order(models.Model):
 
     author_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    positions =
-    status =  models.TextField(default=StatusChoices.NEW, choices=StatusChoices.choices)
+    # positions =
+    status = models.TextField(default=StatusChoices.NEW, choices=StatusChoices.choices)
     order_sum = models.IntegerField()
     creation_date = models.DateField(
         auto_now_add=True
     )
-    updating_date = models.DateField(default=creation_date)
+    updating_date = models.DateField(auto_now_add=True)
 
 
 class Collection(models.Model):
 
-    title = models.CharField()
+    title = models.CharField(max_length=128)
     text = models.TextField(default='')
     products = models.ManyToManyField(Product)
     creation_date = models.DateField(
         auto_now_add=True
     )
-    updating_date = models.DateField(default=creation_date)
+    updating_date = models.DateField(auto_now_add=True)
 
-
-class OrderProduct(models.Model):
-    order_id = 
