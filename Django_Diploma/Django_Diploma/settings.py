@@ -38,9 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'MyShop',
-    # 'rest_framework',
-    # 'rest_framework.authtoken',
-    # 'django_filters',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'django_filters',
 
 ]
 
@@ -72,10 +72,10 @@ TEMPLATES = [
     },
 ]
 
-# REST_FRAMEWORK = {
-#     'DEFAULT_AUTHENTICATION_CLASSES': [
-#         'rest_framework.authentication.TokenAuthentication'],
-# }
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication'],
+}
 
 WSGI_APPLICATION = 'Django_Diploma.wsgi.application'
 
