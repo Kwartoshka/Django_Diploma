@@ -11,14 +11,14 @@ class StatusChoices(models.TextChoices):
 class Product(models.Model):
     name = models.CharField(max_length=128)
     description = models.TextField(default='')
-    price = models.IntegerField(default=0)
+    price = models.PositiveIntegerField(default=0)
     creation_date = models.DateField(
         auto_now_add=True
     )
     updating_date = models.DateField(null=True)
 
     def __str__(self):
-        return f'{self.name} - {self.price} рублей'
+        return f'{self.name} ({self.price} руб.)'
 
 
 class ProductReview(models.Model):
@@ -31,10 +31,13 @@ class ProductReview(models.Model):
     )
     updating_date = models.DateField(null=True)
 
+    def __str__(self):
+        return f'Отзыв {self.author_id} на {self.product}'
+
 
 class Order(models.Model):
-    author_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    # positions =
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    positions = models.ManyToManyField(Product, related_name='Order', through='OrderProduct')
     status = models.TextField(default=StatusChoices.NEW, choices=StatusChoices.choices)
     order_sum = models.IntegerField()
     creation_date = models.DateField(
@@ -42,6 +45,8 @@ class Order(models.Model):
     )
     updating_date = models.DateField(null=True)
 
+    def __str__(self):
+        return f'заказ {self.id} от {self.author} ({self.status})'
 
 class Collection(models.Model):
 
@@ -52,4 +57,16 @@ class Collection(models.Model):
         auto_now_add=True
     )
     updating_date = models.DateField(null=True)
+
+    def __str__(self):
+        return self.title
+
+
+class OrderProduct(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    number = models.PositiveIntegerField()
+
+    def __str__(self):
+        return f'{self.product} - {self.number} шт.'
 
