@@ -22,7 +22,7 @@ class Product(models.Model):
 
 
 class ProductReview(models.Model):
-    author_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     text = models.TextField(default='')
     mark = models.IntegerField()
@@ -37,7 +37,7 @@ class ProductReview(models.Model):
 
 class Order(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    positions = models.ManyToManyField(Product, related_name='Order', through='OrderProduct')
+    positions = models.ManyToManyField('Position', related_name='orders', through='OrderPosition')
     status = models.TextField(default=StatusChoices.NEW, choices=StatusChoices.choices)
     order_sum = models.IntegerField()
     creation_date = models.DateField(
@@ -47,6 +47,7 @@ class Order(models.Model):
 
     def __str__(self):
         return f'заказ {self.id} от {self.author} ({self.status})'
+
 
 class Collection(models.Model):
 
@@ -62,11 +63,18 @@ class Collection(models.Model):
         return self.title
 
 
-class OrderProduct(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+class Position(models.Model):
+
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     number = models.PositiveIntegerField()
 
     def __str__(self):
         return f'{self.product} - {self.number} шт.'
 
+    def display(self):
+        return self.objects.all()
+
+
+class OrderPosition(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    position = models.ForeignKey(Position, on_delete=models.CASCADE)

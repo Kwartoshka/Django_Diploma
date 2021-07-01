@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers, permissions
-from .models import Product, ProductReview, Collection, Order, OrderProduct
+from .models import Product, ProductReview, Collection, Order, Position, OrderPosition
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -9,56 +9,39 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'first_name', 'last_name')
 
 
-class OrderProductSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = OrderProduct
-        fields = ('id', 'product')
-
-
 class ProductSerializer(serializers.ModelSerializer):
-    # creator = UserSerializer(read_only=True,)
 
     class Meta:
         model = Product
         fields = '__all__'
 
-    # def validate(self, data):
-    #     method = self.context['request'].method
-    #     if method =='POST':
-    #         if data['price'] < 0:
-    #             raise serializers.ValidationError('Цена товара не может быть отрицательной')
-    #     elif method in {'PUT', 'PATCH'}:
-    #         price = data.get('price', None)
-    #         if price is None:
-    #             pass
-    #         elif price < 0:
-    #             raise serializers.ValidationError('Цена товара не может быть отрицательной')
-    #
-    #     return data
+
+class ProductShortSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Product
+        fields = ['name']
 
 
 class ProductReviewSerializer(serializers.ModelSerializer):
-    author_id = UserSerializer(read_only=True, )
-    print(author_id)
+    author = UserSerializer(read_only=True, )
 
     class Meta:
         model = ProductReview
         fields = '__all__'
 
     def create(self, validated_data):
-        # print(validated_data)
-        validated_data['author_id'] = self.context['request'].user
-
+        validated_data['author'] = self.context['request'].user
+        print(validated_data)
         return super().create(validated_data)
 
     def validate(self, data):
-        print(data)
         method = self.context["request"].method
         user = self.context["request"].user
         marks = [i for i in range(1, 6)]
         if method == 'POST':
             product = data['product']
-            if ProductReview.objects.all().filter(author_id=user, product=product):
+            if ProductReview.objects.all().filter(author=user, product=product):
                 raise serializers.ValidationError('Отзыв к данному товару от текущего пользователя уже существует')
             if data['mark'] not in marks:
                 raise serializers.ValidationError('Оценка должна быть целым числом от 1 до 5')
@@ -77,19 +60,59 @@ class CollectionSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-# class OrderProductSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = OrderProduct
-#         fields = '__all__'
+class PositionSerializer(serializers.ModelSerializer):
+    # product = ProductShortSerializer(read_only=True, )
+
+    class Meta:
+        model = Position
+        fields = '__all__'
 
 
 class OrderSerializer(serializers.ModelSerializer):
-
-    # for position in positions: = OrderProductSerializer(read_only=True, )
-    # author = UserSerializer(read_only=True, )
-    # print(positions)
+    author = UserSerializer(read_only=True, )
+    positions = PositionSerializer(many=True)
 
     class Meta:
         model = Order
         fields = '__all__'
+
+    def create(self, validated_data):
+        validated_data['author'] = self.context['request'].user
+        print(validated_data)
+        positions = validated_data['positions']
+        print(positions)
+        positionz = []
+        order_sum = 0
+        for position in positions:
+            product = position['product']
+            price = product.price
+            number = position['number']
+            order_sum += price * number
+            instance = Position.objects.create(product=product, number=number)
+            print(instance.id)
+            positionz.append(instance.id)
+        author = validated_data['author']
+        # pos = positions.set()
+        instance = Order.objects.create(author=author, order_sum=order_sum)
+        for position in positionz:
+            OrderPosition.objects.create(order_id=instance.id, position_id=position)
+
+        return instance
+        # return super().create(validated_data)
+
+
+class OrderPositionsIdSerializer(serializers.ModelSerializer):
+    author = UserSerializer(read_only=True, )
+    # positions = PositionSerializer(many=True)
+
+    class Meta:
+        model = Order
+        fields = '__all__'
+
+    def create(self, validated_data):
+        validated_data['author'] = self.context['request'].user
+
+        return super().create(validated_data)
+
+
 

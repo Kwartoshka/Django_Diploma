@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
-from .models import Product, ProductReview, Collection, Order, OrderProduct
-from .serializers import ProductSerializer, ProductReviewSerializer, CollectionSerializer, OrderSerializer
+from .models import Product, ProductReview, Collection, Order
+from .serializers import ProductSerializer, ProductReviewSerializer, CollectionSerializer, OrderSerializer,\
+    OrderPositionsIdSerializer
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, BasePermission
 from datetime import date
 
@@ -23,6 +24,7 @@ class ProductViewSet(ModelViewSet):
             return [IsAuthenticated(), IsAdminUser(), IsAuthor()]
         elif self.action == 'update':
             data = self.request.data
+
             _mutable = data._mutable
             data._mutable = True
             data['updating_date'] = date.today()
@@ -39,7 +41,9 @@ class ProductReviewViewSet(ModelViewSet):
         if self.action == 'create':
             return [IsAuthenticated()]
         elif self.action == 'update':
+
             data = self.request.data
+            print(data)
             _mutable = data._mutable
             data._mutable = True
             data['updating_date'] = date.today()
@@ -68,16 +72,26 @@ class CollectionViewSet(ModelViewSet):
 class OrderViewSet(ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+    # def get_serializer_class(self):
+    #     if self.action in {'list', 'retrieve'}:
+    #         return OrderSerializer
+    #     else:
+    #         return OrderPositionsIdSerializer
 
     def get_permissions(self):
         if self.action == 'create':
             return [IsAuthenticated(), IsAdminUser()]
+
         elif self.action == 'update':
+
             data = self.request.data
-            _mutable = data._mutable
-            data._mutable = True
+            print(data)
+            # _mutable = data._mutable
+            # data._mutable = True
             data['updating_date'] = date.today()
+            print(data)
 
             return [IsAuthenticated(), IsAdminUser()]
+
         return []
 
