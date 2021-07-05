@@ -23,6 +23,8 @@ router.register('api/products', views.ProductViewSet, basename='products')
 router.register('api/reviews', views.ProductReviewViewSet, basename='reviews')
 router.register('api/collections', views.CollectionViewSet, basename='collections')
 router.register('api/orders', views.OrderViewSet, basename='orders')
+router.register('api/orders2', views.Order2ViewSet, basename='orders2')
+router.register('api/orderposition', views.OrderPosition2ViewSet, basename='orderpos2')
 
 urlpatterns = [
     path('api/', include(router.urls)),

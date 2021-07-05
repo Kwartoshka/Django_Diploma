@@ -3,18 +3,18 @@ from django.conf import settings
 
 
 class StatusChoices(models.TextChoices):
+
     NEW = 'NEW', 'Новый'
     IN_PROGRESS = 'IN_PROGRESS', 'В процессе'
     DONE = 'DONE', 'Выполнен'
 
 
 class Product(models.Model):
+
     name = models.CharField(max_length=128)
     description = models.TextField(default='')
     price = models.PositiveIntegerField(default=0)
-    creation_date = models.DateField(
-        auto_now_add=True
-    )
+    creation_date = models.DateField(auto_now_add=True)
     updating_date = models.DateField(null=True)
 
     def __str__(self):
@@ -26,9 +26,7 @@ class ProductReview(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     text = models.TextField(default='')
     mark = models.IntegerField()
-    creation_date = models.DateField(
-        auto_now_add=True
-    )
+    creation_date = models.DateField(auto_now_add=True)
     updating_date = models.DateField(null=True)
 
     def __str__(self):
@@ -40,9 +38,20 @@ class Order(models.Model):
     positions = models.ManyToManyField('Position', related_name='orders', through='OrderPosition')
     status = models.TextField(default=StatusChoices.NEW, choices=StatusChoices.choices)
     order_sum = models.IntegerField()
-    creation_date = models.DateField(
-        auto_now_add=True
-    )
+    creation_date = models.DateField(auto_now_add=True)
+    updating_date = models.DateField(null=True)
+
+    def __str__(self):
+        return f'заказ {self.id} от {self.author} ({self.status})'
+
+
+class Order2(models.Model):
+
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    positions = models.ManyToManyField(Product, related_name='orders2', through='OrderPosition2')
+    status = models.TextField(default=StatusChoices.NEW, choices=StatusChoices.choices)
+    order_sum = models.IntegerField()
+    creation_date = models.DateField(auto_now_add=True)
     updating_date = models.DateField(null=True)
 
     def __str__(self):
@@ -54,9 +63,7 @@ class Collection(models.Model):
     title = models.CharField(max_length=128)
     text = models.TextField(default='')
     products = models.ManyToManyField(Product)
-    creation_date = models.DateField(
-        auto_now_add=True
-    )
+    creation_date = models.DateField(auto_now_add=True)
     updating_date = models.DateField(null=True)
 
     def __str__(self):

@@ -1,6 +1,5 @@
 from django.contrib import admin
-from .models import Product, ProductReview, Collection, Order, Position
-# Register your models here.
+from .models import Product, ProductReview, Collection, Order, Position, Order2
 
 
 class CollectionInline(admin.TabularInline):
@@ -11,8 +10,8 @@ class OrderInline(admin.TabularInline):
     model = Order.positions.through
 
 
-# class PositionInline(admin.TabularInline):
-#     model = Position.products.through
+class Order2Inline(admin.TabularInline):
+    model = Order2.positions.through
 
 
 @admin.register(Product)
@@ -22,8 +21,18 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
+    # model = Order.positions.through
+
     inlines = [OrderInline]
     exclude = ['positions', 'updating_date']
+    list_filter = ('order_sum',)
+    pass
+
+
+@admin.register(Order2)
+class Order2Admin(admin.ModelAdmin):
+    inlines = [Order2Inline]
+    exclude = ['positions']
     pass
 
 
@@ -41,6 +50,5 @@ class CollectionAdmin(admin.ModelAdmin):
 
 @admin.register(ProductReview)
 class ProductReviewAdmin(admin.ModelAdmin):
+    exclude = ['updating_date']
     pass
-
-
