@@ -43,5 +43,3 @@ class OrderFilter(FilterSet):
     class Meta:
         model = Order
         fields = ['status', 'updating_date', 'creation_date']
-
-

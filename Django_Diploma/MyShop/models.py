@@ -37,20 +37,7 @@ class Order(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     positions = models.ManyToManyField('Position', related_name='orders', through='OrderPosition')
     status = models.TextField(default=StatusChoices.NEW, choices=StatusChoices.choices)
-    order_sum = models.IntegerField()
-    creation_date = models.DateField(auto_now_add=True)
-    updating_date = models.DateField(null=True)
-
-    def __str__(self):
-        return f'заказ {self.id} от {self.author} ({self.status})'
-
-
-class Order2(models.Model):
-
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    positions = models.ManyToManyField(Product, related_name='orders2', through='OrderPosition2')
-    status = models.TextField(default=StatusChoices.NEW, choices=StatusChoices.choices)
-    order_sum = models.IntegerField()
+    order_sum = models.IntegerField(null=True)
     creation_date = models.DateField(auto_now_add=True)
     updating_date = models.DateField(null=True)
 

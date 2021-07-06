@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, ProductReview, Collection, Order, Position, Order2
+from .models import Product, ProductReview, Collection, Order, Position
 
 
 class CollectionInline(admin.TabularInline):
@@ -8,10 +8,6 @@ class CollectionInline(admin.TabularInline):
 
 class OrderInline(admin.TabularInline):
     model = Order.positions.through
-
-
-class Order2Inline(admin.TabularInline):
-    model = Order2.positions.through
 
 
 @admin.register(Product)
@@ -26,13 +22,6 @@ class OrderAdmin(admin.ModelAdmin):
     inlines = [OrderInline]
     exclude = ['positions', 'updating_date']
     list_filter = ('order_sum',)
-    pass
-
-
-@admin.register(Order2)
-class Order2Admin(admin.ModelAdmin):
-    inlines = [Order2Inline]
-    exclude = ['positions']
     pass
 
 

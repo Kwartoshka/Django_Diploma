@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
-from rest_framework import serializers, permissions
+from rest_framework import serializers
 from rest_framework.utils import model_meta
-from .models import Product, ProductReview, Collection, Order, Position, OrderPosition2, OrderPosition
+from .models import Product, ProductReview, Collection, Order, Position, OrderPosition
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -33,7 +33,6 @@ class ProductReviewSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         validated_data['author'] = self.context['request'].user
-        # print(validated_data)
         return super().create(validated_data)
 
     def validate(self, data):
@@ -79,7 +78,7 @@ class OrderSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data['author'] = self.context['request'].user
         positions = validated_data['positions']
-        positionz = []
+        positions_to_create = []
         order_sum = 0
         for position in positions:
             product = position['product']
@@ -87,10 +86,10 @@ class OrderSerializer(serializers.ModelSerializer):
             number = position['number']
             order_sum += price * number
             instance = Position.objects.create(product=product, number=number)
-            positionz.append(instance.id)
+            positions_to_create.append(instance.id)
         author = validated_data['author']
         instance = Order.objects.create(author=author, order_sum=order_sum)
-        for position in positionz:
+        for position in positions_to_create:
             OrderPosition.objects.create(order_id=instance.id, position_id=position)
 
         return instance
@@ -109,21 +108,13 @@ class OrderSerializer(serializers.ModelSerializer):
         for attr, value in m2m_fields:
             if attr != 'positions':
 
-                # print(attr)
-                # print(value)
-
                 field = getattr(instance, attr)
-                # print(field)
                 field.set(value)
-            else:
-                # print(attr)
-                # print(value)
-                obj = Order.objects.get(id=instance.id)
 
+            else:
+                obj = Order.objects.get(id=instance.id)
+                order_sum = 0
                 positions = Position.objects.all().filter(orders=obj)
-                # print(positions)
-                # products = [p.product for p in positions]
-                # print(products)
                 relations = []
                 new = []
                 for p in value:
@@ -132,57 +123,22 @@ class OrderSerializer(serializers.ModelSerializer):
                     position = positions.filter(product=product)
                     if position:
                         if position[0].number != number:
-                            uppa = Position.objects.filter(product=product)
-                            object = Position.objects.filter(product=product)[0]
-                            uppa.update(number=number)
+                            updating = Position.objects.filter(product=product)
+                            updating.update(number=number)
+                        order_sum += product.price * number
                         relations.append(product)
                     else:
                         new_position = Position.objects.create(product=product, number=number)
                         new.append(new_position)
-                # print(positions)
-                print(relations)
+                        order_sum += position[0].price * number
                 if relations:
                     for position in positions:
 
                         if position.product not in relations:
-                            print('ЕГО ТУТ НЕТ')
                             Position.objects.filter(id=position.id).delete()
                 for position in new:
                     OrderPosition.objects.create(order_id=instance.id, position_id=position.id)
-
+                instance.order_sum = order_sum
         instance.save()
 
         return instance
-
-        def validate(self, data):
-        method = self.context["request"].method
-        user = self.context["request"].user
-        marks = [i for i in range(1, 6)]
-        if method == 'POST':
-            product = data['product']
-            if ProductReview.objects.all().filter(author=user, product=product):
-                raise serializers.ValidationError('Отзыв к данному товару от текущего пользователя уже существует')
-            if data['mark'] not in marks:
-                raise serializers.ValidationError('Оценка должна быть целым числом от 1 до 5')
-        elif method in {'PATCH', 'PUT'}:
-            mark = data.get('mark', None)
-            if mark not in marks and mark is not None:
-                raise serializers.ValidationError('Оценка должна быть целым числом от 1 до 5')
-
-        return data
-
-
-class OrderPosition2Serializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = OrderPosition2
-        fields = ['id', 'position_id']
-
-
-class Order2Serializer(serializers.ModelSerializer):
-    author = UserSerializer(read_only=True, )
-    positions = OrderPosition2Serializer(many=True,)
-
-    class Meta:
-        model = Order
-        fields = '__all__'

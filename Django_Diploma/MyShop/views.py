@@ -1,20 +1,21 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
-from .models import Product, ProductReview, Collection, Order, Order2, OrderPosition2
-from .serializers import ProductSerializer, ProductReviewSerializer, CollectionSerializer, OrderSerializer,\
-     Order2Serializer, OrderPosition2Serializer
-from rest_framework.permissions import IsAuthenticated, IsAdminUser, BasePermission
+from .models import Product, ProductReview, Collection, Order
+from .serializers import ProductSerializer, ProductReviewSerializer, CollectionSerializer, OrderSerializer
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, BasePermission, SAFE_METHODS
 from datetime import date
 from .filters import ProductFilter, ProductReviewFilter, OrderFilter
 from django_filters.rest_framework import DjangoFilterBackend
 
 
-class IsAuthor(BasePermission):
+class IsAuthorOrAdmin(BasePermission):
 
-    def has_permission(self, request, view):
-        user = request.user
-        # print(dir(request).parser_context())
-        return True
+    def has_object_permission(self, request, view, obj):
+        if request.method in SAFE_METHODS:
+            return True
+        print(obj.author)
+        print(request.user)
+        return obj.author == request.user or bool(request.user and request.user.is_staff)
 
 
 class ProductViewSet(ModelViewSet):
@@ -25,8 +26,8 @@ class ProductViewSet(ModelViewSet):
 
     def get_permissions(self):
         if self.action == 'create':
-            return [IsAuthenticated(), IsAdminUser(), IsAuthor()]
-        elif self.action == 'update':
+            return [IsAuthenticated(), IsAdminUser()]
+        elif self.action in ['update', 'partial_update', 'destroy']:
             data = self.request.data
 
             _mutable = data._mutable
@@ -46,15 +47,14 @@ class ProductReviewViewSet(ModelViewSet):
     def get_permissions(self):
         if self.action == 'create':
             return [IsAuthenticated()]
-        elif self.action == 'update':
+        elif self.action in ['update', 'partial_update', 'destroy']:
 
             data = self.request.data
-            # print(data)
             _mutable = data._mutable
             data._mutable = True
             data['updating_date'] = date.today()
 
-            return [IsAuthenticated(), IsAuthor()]
+            return [IsAuthenticated(), IsAuthorOrAdmin()]
         return []
 
 
@@ -65,7 +65,8 @@ class CollectionViewSet(ModelViewSet):
     def get_permissions(self):
         if self.action == 'create':
             return [IsAuthenticated(), IsAdminUser()]
-        elif self.action == 'update':
+        elif self.action in ['update', 'partial_update', 'destroy']:
+
             data = self.request.data
             _mutable = data._mutable
             data._mutable = True
@@ -80,51 +81,24 @@ class OrderViewSet(ModelViewSet):
     serializer_class = OrderSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = OrderFilter
-    # def get_serializer_class(self):
-    #     if self.action in {'list', 'retrieve'}:
-    #         return OrderSerializer
-    #     else:
-    #         return OrderPositionsIdSerializer
 
     def get_permissions(self):
+        print(self.action)
         if self.action == 'create':
-            return [IsAuthenticated(), IsAdminUser()]
+            return [IsAuthenticated()]
 
-        elif self.action == 'update':
+        elif self.action in ['update', 'partial_update', 'destroy']:
 
             data = self.request.data
-            # print(data)
-            # _mutable = data._mutable
-            # data._mutable = True
-            data['updating_date'] = date.today()
-            # print(data)
+            try:
+                data['updating_date'] = date.today()
+            except AttributeError:
+                _mutable = data._mutable
+                data._mutable = True
+                data['updating_date'] = date.today()
+            status = data.get('status', None)
+            if (not [IsAuthenticated(), IsAdminUser()]) and status:
+                return False
 
-            return [IsAuthenticated(), IsAdminUser()]
-
+            return [IsAuthenticated(), IsAuthorOrAdmin()]
         return []
-
-
-class Order2ViewSet(ModelViewSet):
-    queryset = Order2.objects.all()
-    serializer_class = Order2Serializer
-    # filter_backends = [DjangoFilterBackend]
-    # filterset_class = Order2Filter
-
-    def get_permissions(self):
-        if self.action == 'create':
-            return [IsAuthenticated(), IsAdminUser()]
-
-        elif self.action == 'update':
-
-            data = self.request.data
-
-            data['updating_date'] = date.today()
-
-            return [IsAuthenticated(), IsAdminUser()]
-
-        return []
-
-
-class OrderPosition2ViewSet(ModelViewSet):
-    queryset = OrderPosition2.objects.all()
-    serializer_class = OrderPosition2Serializer
