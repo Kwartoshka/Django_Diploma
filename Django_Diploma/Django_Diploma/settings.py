@@ -96,6 +96,9 @@ DATABASES = {
         'PASSWORD': 'basic1',
         'HOST': '127.0.0.1',
         'PORT': '5432',
+        'TEST': {
+            'NAME': 'test_product'
+        }
     }
 }
 

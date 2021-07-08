@@ -19,14 +19,12 @@ from MyShop import views
 from rest_framework.routers import DefaultRouter
 router = DefaultRouter()
 
-router.register('api/products', views.ProductViewSet, basename='products')
-router.register('api/reviews', views.ProductReviewViewSet, basename='reviews')
-router.register('api/collections', views.CollectionViewSet, basename='collections')
-router.register('api/orders', views.OrderViewSet, basename='orders')
+router.register("products", views.ProductViewSet, basename="products")
+router.register("reviews", views.ProductReviewViewSet, basename="reviews")
+router.register("collections", views.CollectionViewSet, basename="collections")
+router.register("orders", views.OrderViewSet, basename="orders")
 
 urlpatterns = [
-    path('api/', include(router.urls)),
+    path("api/", include(router.urls)),
     path('admin/', admin.site.urls),
-    path('', include(router.urls), name='prods')
-
 ]

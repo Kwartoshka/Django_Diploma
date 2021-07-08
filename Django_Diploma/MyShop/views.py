@@ -1,4 +1,5 @@
-from django.shortcuts import render
+# from django.urls import reverse
+from django.urls import reverse
 from rest_framework.viewsets import ModelViewSet
 from .models import Product, ProductReview, Collection, Order
 from .serializers import ProductSerializer, ProductReviewSerializer, CollectionSerializer, OrderSerializer
@@ -23,7 +24,6 @@ class ProductViewSet(ModelViewSet):
     serializer_class = ProductSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = ProductFilter
-
     def get_permissions(self):
         if self.action == 'create':
             return [IsAuthenticated(), IsAdminUser()]
