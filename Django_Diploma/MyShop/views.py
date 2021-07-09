@@ -24,16 +24,15 @@ class ProductViewSet(ModelViewSet):
     serializer_class = ProductSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = ProductFilter
-    def get_permissions(self):
-        if self.action == 'create':
-            return [IsAuthenticated(), IsAdminUser()]
-        elif self.action in ['update', 'partial_update', 'destroy']:
-            data = self.request.data
 
+    def get_permissions(self):
+        if self.action in ['create', 'destroy']:
+            return [IsAuthenticated(), IsAdminUser()]
+        elif self.action in ['update', 'partial_update']:
+            data = self.request.data
             _mutable = data._mutable
             data._mutable = True
             data['updating_date'] = date.today()
-
             return [IsAuthenticated(), IsAdminUser()]
         return []
 
