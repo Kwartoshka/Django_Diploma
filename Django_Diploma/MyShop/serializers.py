@@ -130,7 +130,7 @@ class OrderSerializer(serializers.ModelSerializer):
                     else:
                         new_position = Position.objects.create(product=product, number=number)
                         new.append(new_position)
-                        order_sum += position[0].price * number
+                        order_sum += new_position.product.price * number
                 if relations:
                     for position in positions:
 
@@ -142,3 +142,15 @@ class OrderSerializer(serializers.ModelSerializer):
         instance.save()
 
         return instance
+
+    def validate(self, data):
+        method = self.context["request"].method
+        if method in ['POST', 'PATCH', 'PUT']:
+            positions = data['positions']
+            products = []
+            for position in positions:
+                if position['product'] in products:
+                    raise serializers.ValidationError('Позиции в заказе дублируются!')
+                else:
+                    products.append(position['product'])
+        return data

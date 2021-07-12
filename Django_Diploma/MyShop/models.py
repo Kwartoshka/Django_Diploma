@@ -1,3 +1,4 @@
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.conf import settings
 
@@ -49,7 +50,7 @@ class Collection(models.Model):
 
     title = models.CharField(max_length=128)
     text = models.TextField(default='')
-    products = models.ManyToManyField(Product)
+    products = models.ManyToManyField(Product, related_name='collections')
     creation_date = models.DateField(auto_now_add=True)
     updating_date = models.DateField(null=True)
 
@@ -60,7 +61,9 @@ class Collection(models.Model):
 class Position(models.Model):
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    number = models.PositiveIntegerField()
+    number = models.PositiveIntegerField(validators=[
+            MaxValueValidator(100),
+            MinValueValidator(1)])
 
     def __str__(self):
         return f'{self.product} - {self.number} шт.'
