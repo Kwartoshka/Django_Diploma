@@ -17,21 +17,16 @@ class IncludeFilter(Filter):
 
 class IncludeProductFilter(Filter):
     def filter(self, qs, value):
-        print(qs)
         if value is None:
             return qs
         summary_query = []
         for order in qs:
             positions = order.positions
             for position in positions.all():
-                print(type(position.product.id))
-                print(int(value))
                 if position.product.id == int(value):
-                    print('tcnm rjynfrn')
                     summary_query.append(order.id)
         summary_query = qs.filter(id__in=summary_query)
         return summary_query
-
 
 
 class ProductFilter(FilterSet):
@@ -53,8 +48,10 @@ class ProductReviewFilter(FilterSet):
 
 
 class OrderFilter(FilterSet):
-    creation_date = DateFromToRangeFilter()
-    updating_date = DateFromToRangeFilter()
+    created = DateFromToRangeFilter(field_name='creation_date')
+    created_at = django_filters.DateFilter(field_name='creation_date')
+    updated = DateFromToRangeFilter(field_name='updating_date')
+    updated_at = django_filters.DateFilter(field_name='updating_date')
     order_sum = django_filters.NumberFilter()
     order_sum__gt = django_filters.NumberFilter(field_name='order_sum', lookup_expr='gt')
     order_sum__lt = django_filters.NumberFilter(field_name='order_sum', lookup_expr='lt')

@@ -77,12 +77,12 @@ class OrderViewSet(ModelViewSet):
             elif self.request.user.is_authenticated and self.request.user:
                 return self.queryset.filter(author=self.request.user)
             else:
-                return self.queryset.none
+                return self.queryset
         return self.queryset
 
     def get_permissions(self):
         print(self.action)
-        if self.action == 'retrieve':
+        if self.action in ['retrieve', 'list']:
             return [IsAuthenticated(), IsAuthorOrAdmin()]
         elif self.action == 'create':
             return [IsAuthenticated()]

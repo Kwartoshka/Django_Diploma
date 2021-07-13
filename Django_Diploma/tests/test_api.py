@@ -159,57 +159,62 @@ from datetime import date
 #     assert resp.status_code == expected_status
 #
 #
-@pytest.mark.parametrize(
-    ['author_field', 'author_exists', "creation_date", 'product', 'expected_status', 'length'],
-    (
-            (True, True, '', '', HTTP_200_OK, 3),
-            (True, False, '', '', HTTP_400_BAD_REQUEST, None),
-            (False, True, '', date.today(), '', HTTP_200_OK, 6),
-            ('', '2020-11-12', '', HTTP_200_OK, 0),
-            ('', '', 1, HTTP_200_OK, 3),
-            ('', '', 3, HTTP_200_OK, 1)
-    )
-)
-@pytest.mark.django_db
-def test_get_reviews(author_field, author_exists, creation_date, product, expected_status, length):
-    client = APIClient()
-    url = reverse("reviews-list")
-
-    product_1= Product.objects.create(name='iphone', price=100000, description='brand new')
-    product_2 = Product.objects.create(name='Samsung', price=83000, description='new too')
-    product_3 = Product.objects.create(name='nokia', price=13000, description='old')
-    user_1 = User.objects.create_superuser('stranger1', 'stranger1@stranger.com', 'stranger1')
-    user_2 = User.objects.create_superuser('stranger2', 'stranger2@stranger.com', 'stranger2')
-    user_3 = User.objects.create_superuser('stranger3', 'stranger3@stranger.com', 'stranger3')
-
-    review = ProductReview.objects.bulk_create(
-        [
-            ProductReview(author=user_1, mark=3, product=product_1),
-            ProductReview(author=user_2, mark=3, product=product_1),
-            ProductReview(author=user_3, mark=3, product=product_1),
-            ProductReview(author=user_1, mark=3, product=product_2),
-            ProductReview(author=user_2, mark=3, product=product_2),
-            ProductReview(author=user_1, mark=3, product=product_3),
-        ]
-    )
-    params = {
-        'author': '',
-        'creation_date': creation_date,
-        'product': product,
-    }
-    if author_field:
-        if author_exists:
-            params['author'] = user_1.id
-        else:
-            params['author'] = user_1.id+999
-
-    resp = client.get(url, params)
-    # resp = client.get(url)
-    assert resp.status_code == expected_status
-    print(resp.json())
-    assert len(resp.json()) == length
-
-
+# @pytest.mark.parametrize(
+#     ['author_field', 'author_exists', "creation_date", 'product', 'expected_status', 'length'],
+#     (
+#             (True, True, '', '', HTTP_200_OK, 3),
+#             (True, False, '', '', HTTP_400_BAD_REQUEST, 1),
+#             (False, False, date.today(), '', HTTP_200_OK, 6),
+#             (False, False, '2020-11-12', '', HTTP_200_OK, 0),
+#             (False, False, '', 1, HTTP_200_OK, 3),
+#             (False, False, '', 3, HTTP_200_OK, 1),
+#     )
+# )
+# @pytest.mark.django_db
+# def test_get_reviews(author_field, author_exists, creation_date, product, expected_status, length):
+#     client = APIClient()
+#     url = reverse("reviews-list")
+#
+#     product_1 = Product.objects.create(name='iphone', price=100000, description='brand new')
+#     product_2 = Product.objects.create(name='Samsung', price=83000, description='new too')
+#     product_3 = Product.objects.create(name='nokia', price=13000, description='old')
+#     user_1 = User.objects.create_superuser('stranger1', 'stranger1@stranger.com', 'stranger1')
+#     user_2 = User.objects.create_superuser('stranger2', 'stranger2@stranger.com', 'stranger2')
+#     user_3 = User.objects.create_superuser('stranger3', 'stranger3@stranger.com', 'stranger3')
+#
+#     if product == 1:
+#         product = product_1.id
+#     elif product == 2:
+#         product = product_2.id
+#     elif product == 3:
+#         product = product_3.id
+#
+#     review = ProductReview.objects.bulk_create(
+#         [
+#             ProductReview(author=user_1, mark=3, product=product_1),
+#             ProductReview(author=user_2, mark=3, product=product_1),
+#             ProductReview(author=user_3, mark=3, product=product_1),
+#             ProductReview(author=user_1, mark=3, product=product_2),
+#             ProductReview(author=user_2, mark=3, product=product_2),
+#             ProductReview(author=user_1, mark=3, product=product_3),
+#         ]
+#     )
+#     params = {
+#         'author': '',
+#         'creation_date': creation_date,
+#         'product': product,
+#     }
+#     if author_field:
+#         if author_exists:
+#             params['author'] = user_1.id
+#         else:
+#             params['author'] = user_1.id+999
+#
+#     resp = client.get(url, params)
+#     assert resp.status_code == expected_status
+#     assert len(resp.json()) == length
+#
+#
 # @pytest.mark.parametrize(
 #     ['authorized', 'product_exists', 'review_exists', 'mark', "expected_status"],
 #     (
@@ -512,6 +517,128 @@ def test_get_reviews(author_field, author_exists, creation_date, product, expect
 #     assert resp.status_code == expected_status
 #
 #
+@pytest.mark.parametrize(
+    ['authorized', 'is_admin', 'status', 'order_sum', 'order_sum__lt', 'order_sum__gt', 'created_at', 'created_before', 'created_after',
+     'updated_at', 'updated_before', 'updated_after', 'product', 'expected_status', 'length'],
+    (
+            (False, True, '', '', '', '', '', '', '', '', '', '', '', HTTP_401_UNAUTHORIZED, None),
+            (True, False, '', '', '', '', '', '', '', '', '', '', '', HTTP_200_OK, 3),
+            (True, True, '', '', '', '', '', '', '', '', '', '', '', HTTP_200_OK, 4),
+
+            (True, True, 'NEW', '', '', '', '', '', '', '', '', '', '', HTTP_200_OK, 3),
+            (True, True, 'DONE', '', '', '', '', '', '', '', '', '', '', HTTP_200_OK, 1),
+
+            (True, True, '', 100000, '', '', '', '', '', '', '', '', '', HTTP_200_OK, 1),
+            (True, True, '', 1000000, '', '', '', '', '', '', '', '', '', HTTP_200_OK, 0),
+
+            (True, True, '', '', 99000, '', '', '', '', '', '', '', '', HTTP_200_OK, 0),
+            (True, True, '', '', 120000, '', '', '', '', '', '', '', '', HTTP_200_OK, 1),
+
+            (True, True, '', '', '', 101000, '', '', '', '', '', '', '', HTTP_200_OK, 3),
+            (True, True, '', '', '', 990000, '', '', '', '', '', '', '', HTTP_200_OK, 0),
+
+            (True, True, '', '', '', '', date.today(), '', '', '', '', '', '', HTTP_200_OK, 4),
+            (True, True, '', '', '', '', '1971-12-12', '', '', '', '', '', '', HTTP_200_OK, 0),
+
+            (True, True, '', '', '', '', '', '1971-12-12', '', '', '', '', '', HTTP_200_OK, 0),
+            (True, True, '', '', '', '', '', '2035-12-12', '', '', '', '', '', HTTP_200_OK, 4),
+
+            (True, True, '', '', '', '', '', '', '2035-12-12', '', '', '', '', HTTP_200_OK, 0),
+            (True, True, '', '', '', '', '', '', '1971-12-12', '', '', '', '', HTTP_200_OK, 4),
+
+            (True, True, '', '', '', '', '', '', '', date.today(), '', '', '', HTTP_200_OK, 1),
+            (True, True, '', '', '', '', '', '', '', '1971-12-12', '', '', '', HTTP_200_OK, 0),
+
+            (True, True, '', '', '', '', '', '', '', '', '1971-12-12', '', '', HTTP_200_OK, 0),
+            (True, True, '', '', '', '', '', '', '', '', '2035-12-12', '', '', HTTP_200_OK, 4),
+
+            (True, True, '', '', '', '', '', '', '', '', '', '2035-12-12', '', HTTP_200_OK, 0),
+            (True, True, '', '', '', '', '', '', '', '', '', '1971-12-12', '', HTTP_200_OK, 4),
+
+            (True, True, '', '', '', '', '', '', '', '', '', '', 2, HTTP_200_OK, 3)
+
+    )
+)
+@pytest.mark.django_db
+def test_get_orders(authorized, is_admin, status, order_sum, order_sum__lt, order_sum__gt, created_at, created_before, created_after, updated_at, updated_before, updated_after, product, expected_status, length):
+    client = APIClient()
+    url = reverse("orders-list")
+
+    product_1 = Product.objects.create(name="iphone", price=100000)
+    product_2 = Product.objects.create(name="samsung", price=99000)
+    product_3 = Product.objects.create(name="nokia", price=13000)
+
+    user = User.objects.create_user('johnathan', 'lennono@thebeatles.com', 'johnpassword')
+    user_token = Token.objects.create(user=user)
+    superuser = User.objects.create_superuser('admin', 'admin@thebeatles.com', 'admin')
+    superuser_token = Token.objects.create(user=superuser)
+
+    position_1 = Position.objects.create(product=product_1, number=1)
+    position_2 = Position.objects.create(product=product_2, number=2)
+    order = Order.objects.create(author=user, order_sum=298000)
+    order.positions.set([position_1.id, position_2.id])
+
+    position_3 = Position.objects.create(product=product_2, number=3)
+    position_4 = Position.objects.create(product=product_3, number=4)
+    order = Order.objects.create(author=user, order_sum=349000)
+    order.positions.set([position_3.id, position_4.id])
+
+    position_5 = Position.objects.create(product=product_2, number=1)
+    order = Order.objects.create(author=user, order_sum=100000)
+    order.positions.set([position_5.id])
+
+    position_6 = Position.objects.create(product=product_3, number=5)
+    position_7 = Position.objects.create(product=product_1, number=8)
+    order = Order.objects.create(author=superuser, order_sum=865000)
+    order.positions.set([position_6.id, position_7.id])
+    #
+    # patch_data = {'status': 'DONE'}
+    Order.objects.all().filter(id=order.id).update(status='DONE', updating_date=date.today())
+
+    params = {
+        'status': status,
+        'order_sum': order_sum,
+        'order_sum__lt': order_sum__lt,
+        'order_sum__gt': order_sum__gt,
+        'created_at': created_at,
+        'created_before': created_before,
+        'created_after': created_after,
+        'updated_at': updated_at,
+        'updated_before': updated_before,
+        'updated_after': updated_after
+    }
+    if product:
+        params['product'] = product_2.id
+    if authorized:
+        if is_admin:
+            client.credentials(HTTP_AUTHORIZATION=f'Token {superuser_token}')
+        else:
+            client.credentials(HTTP_AUTHORIZATION=f'Token {user_token}')
+
+    resp = client.get(url, params)
+    assert resp.status_code == expected_status
+    if resp.status_code != HTTP_401_UNAUTHORIZED:
+        assert len(resp.json()) == length
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # @pytest.mark.parametrize(
 #     ['authorized', 'product_exists', 'number', 'expected_status'],
 #     (

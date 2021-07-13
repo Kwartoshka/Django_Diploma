@@ -12,6 +12,7 @@ class OrderInline(admin.TabularInline):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
+    exclude = ('updating_date',)
     pass
 
 
@@ -20,8 +21,8 @@ class OrderAdmin(admin.ModelAdmin):
     # model = Order.positions.through
 
     inlines = [OrderInline]
-    exclude = ['positions', 'updating_date']
-    list_filter = ('order_sum',)
+    exclude = ['positions', 'updating_date', 'order_sum']
+    # list_filter = ('order_sum',)
     pass
 
 
@@ -34,7 +35,7 @@ class PositionAdmin(admin.ModelAdmin):
 @admin.register(Collection)
 class CollectionAdmin(admin.ModelAdmin):
     inlines = [CollectionInline]
-    exclude = ['products']
+    exclude = ['products', 'updating_date']
 
 
 @admin.register(ProductReview)

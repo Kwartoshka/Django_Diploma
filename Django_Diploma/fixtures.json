@@ -1,0 +1,1184 @@
+[
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2021-07-13T12:12:32.582Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "1",
+    "object_repr": "e21c25d74ed4f073d57b0e8e9faf8e534b64591e",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2021-07-13T12:57:40.952Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "1",
+    "object_repr": "xiaomi (15000 руб.)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Name\", \"Description\", \"Price\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2021-07-13T12:58:10.389Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "4",
+    "object_repr": "nokia (13000 руб.)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2021-07-13T12:58:50.631Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "2",
+    "object_repr": "justauser",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2021-07-13T12:59:01.667Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "2",
+    "object_repr": "447dcb9c3c7b19a5dc5cd18f9f50e04826a4c6fa",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2021-07-13T12:59:33.938Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "1",
+    "object_repr": "ќтзыв 1 на iphone (17000 руб.)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2021-07-13T13:00:00.782Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "2",
+    "object_repr": "ќтзыв 2 на iphone (17000 руб.)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2021-07-13T13:00:33.189Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "3",
+    "object_repr": "ќтзыв 2 на nokia (5000 руб.)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2021-07-13T13:00:47.308Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "4",
+    "object_repr": "ќтзыв 1 на nokia (5000 руб.)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2021-07-13T13:01:05.532Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "5",
+    "object_repr": "ќтзыв 1 на xiaomi (15000 руб.)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2021-07-13T13:01:32.773Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "4",
+    "object_repr": "samsung (13000 руб.)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Name\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2021-07-13T13:01:59.519Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "6",
+    "object_repr": "ќтзыв 2 на samsung (13000 руб.)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2021-07-13T13:08:48.617Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "1",
+    "object_repr": "NO AMERICANS",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"collection-product relationship\", \"object\": \"Collection_products object (1)\"}}, {\"added\": {\"name\": \"collection-product relationship\", \"object\": \"Collection_products object (2)\"}}, {\"added\": {\"name\": \"collection-product relationship\", \"object\": \"Collection_products object (3)\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2021-07-13T13:09:25.235Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "2",
+    "object_repr": "ALL INCLUSIVE",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"collection-product relationship\", \"object\": \"Collection_products object (4)\"}}, {\"added\": {\"name\": \"collection-product relationship\", \"object\": \"Collection_products object (5)\"}}, {\"added\": {\"name\": \"collection-product relationship\", \"object\": \"Collection_products object (6)\"}}, {\"added\": {\"name\": \"collection-product relationship\", \"object\": \"Collection_products object (7)\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2021-07-13T13:10:28.540Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "1",
+    "object_repr": "nokia (5000 руб.) - 1 шт.",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2021-07-13T13:10:36.008Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "2",
+    "object_repr": "samsung (13000 руб.) - 3 шт.",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2021-07-13T13:11:24.162Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "2",
+    "object_repr": "заказ 2 от admin (NEW)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"order position\", \"object\": \"OrderPosition object (1)\"}}, {\"added\": {\"name\": \"order position\", \"object\": \"OrderPosition object (2)\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2021-07-13T13:11:31.672Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "2",
+    "object_repr": "заказ 2 от admin (NEW)",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2021-07-13T13:12:03.668Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "3",
+    "object_repr": "xiaomi (15000 руб.) - 3 шт.",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2021-07-13T13:12:17.743Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "4",
+    "object_repr": "iphone (17000 руб.) - 1 шт.",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2021-07-13T13:12:19.896Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "3",
+    "object_repr": "заказ 3 от justauser (NEW)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"order position\", \"object\": \"OrderPosition object (3)\"}}, {\"added\": {\"name\": \"order position\", \"object\": \"OrderPosition object (4)\"}}]"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 1,
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": 1,
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 2,
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": 1,
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 3,
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": 1,
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 4,
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": 1,
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 5,
+  "fields": {
+    "name": "Can add permission",
+    "content_type": 2,
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 6,
+  "fields": {
+    "name": "Can change permission",
+    "content_type": 2,
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 7,
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": 2,
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 8,
+  "fields": {
+    "name": "Can view permission",
+    "content_type": 2,
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 9,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 3,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 10,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 3,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 11,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 3,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 12,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 3,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 13,
+  "fields": {
+    "name": "Can add user",
+    "content_type": 4,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 14,
+  "fields": {
+    "name": "Can change user",
+    "content_type": 4,
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 15,
+  "fields": {
+    "name": "Can delete user",
+    "content_type": 4,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 16,
+  "fields": {
+    "name": "Can view user",
+    "content_type": 4,
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 17,
+  "fields": {
+    "name": "Can add content type",
+    "content_type": 5,
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 18,
+  "fields": {
+    "name": "Can change content type",
+    "content_type": 5,
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 19,
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": 5,
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 20,
+  "fields": {
+    "name": "Can view content type",
+    "content_type": 5,
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 21,
+  "fields": {
+    "name": "Can add session",
+    "content_type": 6,
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 22,
+  "fields": {
+    "name": "Can change session",
+    "content_type": 6,
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 23,
+  "fields": {
+    "name": "Can delete session",
+    "content_type": 6,
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 24,
+  "fields": {
+    "name": "Can view session",
+    "content_type": 6,
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 25,
+  "fields": {
+    "name": "Can add order",
+    "content_type": 7,
+    "codename": "add_order"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 26,
+  "fields": {
+    "name": "Can change order",
+    "content_type": 7,
+    "codename": "change_order"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 27,
+  "fields": {
+    "name": "Can delete order",
+    "content_type": 7,
+    "codename": "delete_order"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 28,
+  "fields": {
+    "name": "Can view order",
+    "content_type": 7,
+    "codename": "view_order"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 29,
+  "fields": {
+    "name": "Can add product",
+    "content_type": 8,
+    "codename": "add_product"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 30,
+  "fields": {
+    "name": "Can change product",
+    "content_type": 8,
+    "codename": "change_product"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 31,
+  "fields": {
+    "name": "Can delete product",
+    "content_type": 8,
+    "codename": "delete_product"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 32,
+  "fields": {
+    "name": "Can view product",
+    "content_type": 8,
+    "codename": "view_product"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 33,
+  "fields": {
+    "name": "Can add product review",
+    "content_type": 9,
+    "codename": "add_productreview"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 34,
+  "fields": {
+    "name": "Can change product review",
+    "content_type": 9,
+    "codename": "change_productreview"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 35,
+  "fields": {
+    "name": "Can delete product review",
+    "content_type": 9,
+    "codename": "delete_productreview"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 36,
+  "fields": {
+    "name": "Can view product review",
+    "content_type": 9,
+    "codename": "view_productreview"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 37,
+  "fields": {
+    "name": "Can add position",
+    "content_type": 10,
+    "codename": "add_position"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 38,
+  "fields": {
+    "name": "Can change position",
+    "content_type": 10,
+    "codename": "change_position"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 39,
+  "fields": {
+    "name": "Can delete position",
+    "content_type": 10,
+    "codename": "delete_position"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 40,
+  "fields": {
+    "name": "Can view position",
+    "content_type": 10,
+    "codename": "view_position"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 41,
+  "fields": {
+    "name": "Can add order position",
+    "content_type": 11,
+    "codename": "add_orderposition"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 42,
+  "fields": {
+    "name": "Can change order position",
+    "content_type": 11,
+    "codename": "change_orderposition"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 43,
+  "fields": {
+    "name": "Can delete order position",
+    "content_type": 11,
+    "codename": "delete_orderposition"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 44,
+  "fields": {
+    "name": "Can view order position",
+    "content_type": 11,
+    "codename": "view_orderposition"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 45,
+  "fields": {
+    "name": "Can add collection",
+    "content_type": 12,
+    "codename": "add_collection"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 46,
+  "fields": {
+    "name": "Can change collection",
+    "content_type": 12,
+    "codename": "change_collection"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 47,
+  "fields": {
+    "name": "Can delete collection",
+    "content_type": 12,
+    "codename": "delete_collection"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 48,
+  "fields": {
+    "name": "Can view collection",
+    "content_type": 12,
+    "codename": "view_collection"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 49,
+  "fields": {
+    "name": "Can add Token",
+    "content_type": 13,
+    "codename": "add_token"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 50,
+  "fields": {
+    "name": "Can change Token",
+    "content_type": 13,
+    "codename": "change_token"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 51,
+  "fields": {
+    "name": "Can delete Token",
+    "content_type": 13,
+    "codename": "delete_token"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 52,
+  "fields": {
+    "name": "Can view Token",
+    "content_type": 13,
+    "codename": "view_token"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 53,
+  "fields": {
+    "name": "Can add token",
+    "content_type": 14,
+    "codename": "add_tokenproxy"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 54,
+  "fields": {
+    "name": "Can change token",
+    "content_type": 14,
+    "codename": "change_tokenproxy"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 55,
+  "fields": {
+    "name": "Can delete token",
+    "content_type": 14,
+    "codename": "delete_tokenproxy"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 56,
+  "fields": {
+    "name": "Can view token",
+    "content_type": 14,
+    "codename": "view_tokenproxy"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$260000$JFEH42xoergdmAs3Z6aFit$kaF1F6UQ6iOXNFhCWAXFDEYIKvQ8DeJ2Q2CZTQPr7f0=",
+    "last_login": "2021-07-13T12:12:24.446Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@admin.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2021-07-13T12:11:48.492Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$260000$G4lzCOXaDZ8PyCVhFsLpqO$T6XoCRRO4pNllyBlVIer9FqI823vbF34ISQVvSnuFAQ=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "justauser",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2021-07-13T12:58:50.510Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 1,
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 2,
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 3,
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 4,
+  "fields": {
+    "app_label": "auth",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 5,
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 6,
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 7,
+  "fields": {
+    "app_label": "MyShop",
+    "model": "order"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 8,
+  "fields": {
+    "app_label": "MyShop",
+    "model": "product"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 9,
+  "fields": {
+    "app_label": "MyShop",
+    "model": "productreview"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 10,
+  "fields": {
+    "app_label": "MyShop",
+    "model": "position"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 11,
+  "fields": {
+    "app_label": "MyShop",
+    "model": "orderposition"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 12,
+  "fields": {
+    "app_label": "MyShop",
+    "model": "collection"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 13,
+  "fields": {
+    "app_label": "authtoken",
+    "model": "token"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 14,
+  "fields": {
+    "app_label": "authtoken",
+    "model": "tokenproxy"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "rjb0fqe3mf0sl7zp8zw5sbhy03e2cbao",
+  "fields": {
+    "session_data": ".eJxVjDsOwyAQBe9CHSF-Bpwyvc-AdmEJTiIsGbuKcvdgyUXSzsx7bxZg30rYG61hTuzKJLv8MoT4pHqI9IB6X3hc6rbOyI-En7bxaUn0up3t30GBVvqatB0RjYqgrTBGJdSUfDauXwgJ0aN0GKOGrNUgfGdJWLIqSzHaQTn2-QL1Szfg:1m3HGy:2GzJAF5UCNQEJtlvl2odjjXCRw3tlHC7H2c1gY-p81w",
+    "expire_date": "2021-07-27T12:12:24.448Z"
+  }
+},
+{
+  "model": "MyShop.product",
+  "pk": 1,
+  "fields": {
+    "name": "xiaomi",
+    "description": "nihao",
+    "price": 15000,
+    "creation_date": "2021-07-13",
+    "updating_date": null
+  }
+},
+{
+  "model": "MyShop.product",
+  "pk": 2,
+  "fields": {
+    "name": "iphone",
+    "description": "Main",
+    "price": 17000,
+    "creation_date": "2021-07-13",
+    "updating_date": null
+  }
+},
+{
+  "model": "MyShop.product",
+  "pk": 3,
+  "fields": {
+    "name": "nokia",
+    "description": "cheap",
+    "price": 5000,
+    "creation_date": "2021-07-13",
+    "updating_date": null
+  }
+},
+{
+  "model": "MyShop.product",
+  "pk": 4,
+  "fields": {
+    "name": "samsung",
+    "description": "cheapy",
+    "price": 13000,
+    "creation_date": "2021-07-13",
+    "updating_date": null
+  }
+},
+{
+  "model": "MyShop.productreview",
+  "pk": 1,
+  "fields": {
+    "author": 1,
+    "product": 2,
+    "text": "my phone",
+    "mark": 5,
+    "creation_date": "2021-07-13",
+    "updating_date": null
+  }
+},
+{
+  "model": "MyShop.productreview",
+  "pk": 2,
+  "fields": {
+    "author": 2,
+    "product": 2,
+    "text": "not my",
+    "mark": 1,
+    "creation_date": "2021-07-13",
+    "updating_date": null
+  }
+},
+{
+  "model": "MyShop.productreview",
+  "pk": 3,
+  "fields": {
+    "author": 2,
+    "product": 3,
+    "text": "cheeeeeeeeeaaaaap",
+    "mark": 2,
+    "creation_date": "2021-07-13",
+    "updating_date": null
+  }
+},
+{
+  "model": "MyShop.productreview",
+  "pk": 4,
+  "fields": {
+    "author": 1,
+    "product": 3,
+    "text": "cool",
+    "mark": 4,
+    "creation_date": "2021-07-13",
+    "updating_date": null
+  }
+},
+{
+  "model": "MyShop.productreview",
+  "pk": 5,
+  "fields": {
+    "author": 1,
+    "product": 1,
+    "text": "nihao guys",
+    "mark": 3,
+    "creation_date": "2021-07-13",
+    "updating_date": null
+  }
+},
+{
+  "model": "MyShop.productreview",
+  "pk": 6,
+  "fields": {
+    "author": 2,
+    "product": 4,
+    "text": "alternative to iphone",
+    "mark": 5,
+    "creation_date": "2021-07-13",
+    "updating_date": null
+  }
+},
+{
+  "model": "MyShop.order",
+  "pk": 2,
+  "fields": {
+    "author": 1,
+    "status": "NEW",
+    "order_sum": 30000,
+    "creation_date": "2021-07-13",
+    "updating_date": "2021-07-13"
+  }
+},
+{
+  "model": "MyShop.order",
+  "pk": 3,
+  "fields": {
+    "author": 2,
+    "status": "NEW",
+    "order_sum": 56000,
+    "creation_date": "2021-07-13",
+    "updating_date": "2021-07-13"
+  }
+},
+{
+  "model": "MyShop.collection",
+  "pk": 1,
+  "fields": {
+    "title": "NO AMERICANS",
+    "text": "Collection for those, who don't like USA",
+    "creation_date": "2021-07-13",
+    "updating_date": null,
+    "products": [
+      1,
+      3,
+      4
+    ]
+  }
+},
+{
+  "model": "MyShop.collection",
+  "pk": 2,
+  "fields": {
+    "title": "ALL INCLUSIVE",
+    "text": "Collection for those, who likes all countries",
+    "creation_date": "2021-07-13",
+    "updating_date": null,
+    "products": [
+      1,
+      2,
+      3,
+      4
+    ]
+  }
+},
+{
+  "model": "MyShop.position",
+  "pk": 4,
+  "fields": {
+    "product": 2,
+    "number": 1
+  }
+},
+{
+  "model": "MyShop.position",
+  "pk": 5,
+  "fields": {
+    "product": 3,
+    "number": 1
+  }
+},
+{
+  "model": "MyShop.position",
+  "pk": 6,
+  "fields": {
+    "product": 2,
+    "number": 1
+  }
+},
+{
+  "model": "MyShop.position",
+  "pk": 7,
+  "fields": {
+    "product": 4,
+    "number": 1
+  }
+},
+{
+  "model": "MyShop.orderposition",
+  "pk": 4,
+  "fields": {
+    "order": 3,
+    "position": 4
+  }
+},
+{
+  "model": "MyShop.orderposition",
+  "pk": 5,
+  "fields": {
+    "order": 3,
+    "position": 5
+  }
+},
+{
+  "model": "MyShop.orderposition",
+  "pk": 6,
+  "fields": {
+    "order": 2,
+    "position": 6
+  }
+},
+{
+  "model": "MyShop.orderposition",
+  "pk": 7,
+  "fields": {
+    "order": 2,
+    "position": 7
+  }
+},
+{
+  "model": "authtoken.token",
+  "pk": "447dcb9c3c7b19a5dc5cd18f9f50e04826a4c6fa",
+  "fields": {
+    "user": 2,
+    "created": "2021-07-13T12:59:01.666Z"
+  }
+},
+{
+  "model": "authtoken.token",
+  "pk": "e21c25d74ed4f073d57b0e8e9faf8e534b64591e",
+  "fields": {
+    "user": 1,
+    "created": "2021-07-13T12:12:32.580Z"
+  }
+}
+]
