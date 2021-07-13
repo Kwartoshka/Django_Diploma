@@ -113,7 +113,7 @@ url: `/api/v1/product-collections/`
    
 4. Загрузить тестовые данные:
    ````
-   python manage.py loaddata fixture.json
+   python manage.py loaddata fixtures.json
 
 5. Для запуска сервера выполнить команду:
     ````
