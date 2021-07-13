@@ -93,3 +93,32 @@ url: `/api/v1/product-collections/`
 ## Тестирование
 
 В качестве Test Runner'а использован `pytest`.
+
+## Инструкции
+
+Для запуска проекта необходимо:
+1. Создать базу данных PostgreSQL:
+   ```` sql
+    CREATE USER basic with password basic1;
+    CREATE DATABASE basic_db WITH OWNER basic;
+    ALTER USER basic CREATEDB;
+   
+2. Установить зависимости:
+   ````
+    pip install -r requirements.txt
+   
+3. Произвести миграции:
+   ````
+   python manage.py migrate
+   
+4. Загрузить тестовые данные:
+   ````
+   python manage.py loaddata fixture.json
+
+5. Для запуска сервера выполнить команду:
+    ````
+    python manage.py runserver
+
+6. Для запуска тестов выполнить команду:
+   ````
+   pytest
