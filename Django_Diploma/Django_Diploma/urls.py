@@ -25,6 +25,6 @@ router.register("collections", views.CollectionViewSet, basename="collections")
 router.register("orders", views.OrderViewSet, basename="orders")
 
 urlpatterns = [
-    path("api/", include(router.urls)),
+    path("api/v1/", include(router.urls)),
     path('admin/', admin.site.urls),
 ]
