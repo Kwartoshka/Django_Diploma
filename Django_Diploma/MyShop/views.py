@@ -19,9 +19,12 @@ class ProductViewSet(ModelViewSet):
             return [IsAuthenticated(), IsAdminUser()]
         elif self.action in ['update', 'partial_update']:
             data = self.request.data
-            _mutable = data._mutable
-            data._mutable = True
-            data['updating_date'] = date.today()
+            try:
+                data['updating_date'] = date.today()
+            except AttributeError:
+                _mutable = data._mutable
+                data._mutable = True
+                data['updating_date'] = date.today()
             return [IsAuthenticated(), IsAdminUser()]
         return []
 
@@ -40,9 +43,12 @@ class ProductReviewViewSet(ModelViewSet):
         elif self.action in ['update', 'partial_update']:
 
             data = self.request.data
-            _mutable = data._mutable
-            data._mutable = True
-            data['updating_date'] = date.today()
+            try:
+                data['updating_date'] = date.today()
+            except AttributeError:
+                _mutable = data._mutable
+                data._mutable = True
+                data['updating_date'] = date.today()
 
             return [IsAuthenticated(), IsAuthorOrAdmin()]
         return []
@@ -57,9 +63,12 @@ class CollectionViewSet(ModelViewSet):
             return [IsAuthenticated(), IsAdminUser()]
         elif self.action in ['update', 'partial_update']:
             data = self.request.data
-            _mutable = data._mutable
-            data._mutable = True
-            data['updating_date'] = date.today()
+            try:
+                data['updating_date'] = date.today()
+            except AttributeError:
+                _mutable = data._mutable
+                data._mutable = True
+                data['updating_date'] = date.today()
             return [IsAuthenticated(), IsAdminUser()]
         return []
 

@@ -146,11 +146,12 @@ class OrderSerializer(serializers.ModelSerializer):
     def validate(self, data):
         method = self.context["request"].method
         if method in ['POST', 'PATCH', 'PUT']:
-            positions = data['positions']
-            products = []
-            for position in positions:
-                if position['product'] in products:
-                    raise serializers.ValidationError('Позиции в заказе дублируются!')
-                else:
-                    products.append(position['product'])
+            positions = data.get('positions', None)
+            if positions:
+                products = []
+                for position in positions:
+                    if position['product'] in products:
+                        raise serializers.ValidationError('Позиции в заказе дублируются!')
+                    else:
+                        products.append(position['product'])
         return data
